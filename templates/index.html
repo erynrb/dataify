@@ -111,7 +111,6 @@
                     console.log("Raw response text:", text);
                     return JSON.parse(text);
                 })
-                .then(res => res.json())
                 .then(data => {
                     console.log("Backend result:", data);
                     createTable(data, year, num, method);
