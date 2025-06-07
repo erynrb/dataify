@@ -3,8 +3,6 @@ import pandas as pd
 from collections import Counter
 import numpy as np
 from prettytable import PrettyTable
-import glob
-import os
 
 def run(data, year, num, method):
     # choose what year to look at from all data
