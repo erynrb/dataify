@@ -6,7 +6,7 @@ from flask_cors import CORS
 import numpy as np
 
 app=Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5 MB
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024 * 100  # 5 MB
 CORS(app)
 
 @app.route('/')
