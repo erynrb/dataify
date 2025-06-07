@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import dataifySiteBackend as spotScript
 import json
 import pandas as pd
@@ -8,6 +8,11 @@ import numpy as np
 app=Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5 MB
 CORS(app)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

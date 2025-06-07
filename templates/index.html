@@ -102,7 +102,7 @@
                 formData.append("yearInQuestion", year);
                 formData.append("numSongs", num);
                 formData.append("method", method);
-                fetch("http://127.0.0.1:5000/upload", {
+                fetch("https://dataify-z87n.onrender.com/upload", {
                     method: "POST",
                     body: formData
                 })
