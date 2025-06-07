@@ -38,7 +38,7 @@ def upload_file():
         except Exception as e:
             return jsonify({"error": f"Failed to parse JSON: {str(e)}"}), 400
     result = spotScript.run(data, year, num, method)
-    # result = result.tolist()
+    result = result.tolist()
     return jsonify(result)
 
 if __name__ == '__main__':
