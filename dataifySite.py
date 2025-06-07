@@ -17,6 +17,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    print("checkpoint1")
     if 'files' not in request.files:
         return jsonify({"error":"No file found"}), 400
     try:

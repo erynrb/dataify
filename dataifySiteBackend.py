@@ -51,7 +51,7 @@ def run(data, year, num, method):
     #     return mostPlayedCount[:num]
     # if method == 'time':
     #     return mostPlayedTime[:num]
-    
+    print("checkpoint3")
     return ['hello']
 
     del displaytable
