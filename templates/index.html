@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css"/>
+    <title>dataify 🪩</title>
+    <meta charset="UTF-8" />
+
+</head>
+<body>
+<main>
+    <h1>data-ify</h1>
+    <div id="homepage">
+        <div class="recordBanner">
+                <div class="record outerRecord"></div>
+                <div class="record glare" style="height: 90px; width: 90px;"></div>
+                <div class="record glare" style="height: 110px; width: 110px;"></div>
+                <div class="record innerRecord"></div>
+                <div class="record recordHole"></div>
+
+        </div>
+        <main>
+        <div>
+            <div>
+                <label for="userDataID" id="fileSelectionButton" class="but customFileUpload" style="background-color: #CA483B;">choose files</label>
+                <input type="file" id="userDataID" multiple/>
+            </div>
+            <div class="but yearContainer" id="NumberSelect" style="background-color: #D7763F;">
+                <label for="topNum" style="margin-right: 10px;" >top</label> <input class="yearIn" type="number" id="topNum" value="5" style="width:50px"/> <label for="topNum" style="margin-left: 10px;" >songs</label>
+            </div>
+            <div class="but yearContainer">
+                <label for="year" style="margin-right: 10px;">year:</label> <input class="yearIn" type="number" id="year" value="2025"/>
+            </div>
+            <div class="but yearContainer" id="methodSelect" style="background-color: #687837;">
+                <select id="methods">
+                    <option value="default" selected disabled>analyse by</option>
+                    <option value="plays">number of plays</option>
+                    <option value="time">total play time</option>
+                </select>
+            </div>
+            <button onclick="sendCSV()" id="send" class="but button">upload</button>
+        </div>
+        </main>
+    </div>
+    <div id="output" style="display: none;">
+        <main>
+            <h2 id="yearResults"></h2>
+            <div class="topSongs">
+                <div id="resultsTable"></div>
+            </div>
+            <button onclick="returnHome()" id="return" class="but button">return to home</button>
+            <div style="padding-bottom: 70px;"></div>
+        </main>
+    </div>
+</main>
+        <div class="footer">
+            <p>request your data (extended streaming history) from: <a target="_blank" href="https://www.spotify.com/ca-en/account/privacy/">https://www.spotify.com/ca-en/account/privacy/</a><br>created by <a href="https://erynrb.github.io/" target="_blank">Eryn Richardson-Bartha</a>, 2025</p>
+        </div>
+        <script>
+            var fileInput = document.getElementById('userDataID')
+                fileInput.addEventListener('change', function () {
+                    const input = document.getElementById('userDataID');
+                    const label = document.getElementById('fileSelectionButton');
+                    const files = input.files;
+                    const numFiles = files.length;
+                    if (files.length != 0) {
+                        label.textContent = numFiles + " files selected";
+                    }
+                    if (files.length == 0 || !files){
+                        label.textContent = "choose files";
+                    }
+                })
+            function sendCSV() {
+                const glares = document.querySelectorAll(".glare");
+                console.log("upload clicked");
+                const input = document.getElementById('userDataID');
+                const year = document.getElementById('year').value;
+                const num = document.getElementById('topNum').value;
+                const method = document.getElementById('methods').value;
+                console.log(method);
+                console.log(year);
+                console.log(num);
+                const files = input.files;
+                const d = new Date();
+                if (!files || files.length == 0) {
+                    alert("Choose a file first!");
+                    return;
+                }
+                if (!method || method == 'default'){
+                    alert("Select an analysis method first!")
+                    return;
+                }
+                const formData = new FormData();
+                for (let i = 0; i < files.length; i++) {
+                    formData.append("files", files[i]);
+                }
+                console.log("uploading...");
+                glares.forEach(glare => {
+                    glare.classList.toggle("spin");
+                });
+
+                formData.append("yearInQuestion", year);
+                formData.append("numSongs", num);
+                formData.append("method", method);
+                fetch("http://127.0.0.1:5000/upload", {
+                    method: "POST",
+                    body: formData
+                })
+
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Backend result:", data);
+                    createTable(data, year, num, method);
+                    document.getElementById("homepage").style.display = "none";
+                    glares.forEach(glare => {
+                        glare.classList.toggle("spin");
+                    });
+                    document.getElementById("output").style.display = "block";
+                })
+                .catch(err => {
+                    console.error("upload error:", err);
+                })
+            }
+            function createTable(data, year, num, method){
+                let tableHTML = `
+                    <table border="1" cellpadding="8" cellspacing="0">
+                    <thead>
+                        <tr>
+                        <th>track</th>
+                        <th>artist</th>
+                        <th>number of plays</th>
+                        <th>total play time (minutes)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                for (const row of data) {
+                    tableHTML += `
+                    <tr>
+                        <td>${row[0]}</td>
+                        <td>${row[3]}</td>
+                        <td>${row[1]}</td>
+                        <td>${row[2]}</td>
+                    </tr>
+                    `;
+                }
+                tableHTML += `
+                    </tbody>
+                    </table>
+                `;
+                if (method=='play'){var methodText = 'total play time'}
+                else {var methodText = 'number of plays'}
+                if (data.length == 0){
+                    document.getElementById("yearResults").innerHTML = "you have not uploaded any data for the year " + year;
+                }else {
+                    document.getElementById("yearResults").innerHTML = "showing your top "+ num + " songs for " + year + " by " + methodText;
+                    document.getElementById("resultsTable").innerHTML = tableHTML;
+                }
+            }
+            function returnHome(){
+                location.reload();
+            }
+        </script>
+    </body>
+</html>

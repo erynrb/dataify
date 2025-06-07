@@ -1,0 +1,244 @@
+
+body {
+    background-color: #F0ECC9;
+    width: 100vw;
+    margin:auto;
+    font-family: Inter;
+    letter-spacing: -0.04em;
+}
+
+main {
+    text-align: center;
+    width:80%;
+    margin:auto;
+    font-family: Inter;
+    }
+
+h1 {
+    font-weight: bold;
+    font-size: 96px;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+select {
+    background-color:inherit;
+    font-size: 24px;
+    font-weight: 50;
+    border: none;
+    text-align: center;
+    border-radius: 50px;
+    width:90%;
+    height: 100%;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+p{
+    font-size: 12px;
+    font-family: Inter;
+}
+
+
+.footer {
+    position: fixed;
+    left:0px;
+    bottom:0px;
+    height:50px;
+    padding:5px;
+    padding-left: 20px;
+    font-family: Inter;
+    background-color: #F0ECC9;
+}
+
+.recordBanner{
+    position:relative;
+    height: 170px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.record {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+}
+
+.outerRecord {
+    box-shadow: 2px 4px 2px #B8B59A;
+    height: 170px;
+    width: 170px;
+    background-color: #000000;
+    border-radius: 50%;
+
+}
+.innerRecord {
+    height: 70px;
+    width: 70px;
+    background-color: #D7763F;
+    border-radius: 50%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+.recordHole{
+    height: 35px;
+    width: 35px;
+    background-color: #F0ECC9;
+    border-radius: 50%;
+    box-shadow: inset 2px 4px 2px #B8B59A;
+}
+
+.glare {
+    border: 2px solid #000;
+    border-bottom-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+}
+
+.spin {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0%{
+        transform: translate(-50%, -50%) rotate(-20deg);
+    }100%{
+        transform: translate(-50%, -50%) rotate(340deg);
+    }
+}
+
+.but {
+    width: 250px;
+    height: 50px;
+}
+
+.button {
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 50;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #4C999F;
+    font-family: Inter;
+}
+
+.button:hover {
+    cursor:pointer;
+    box-shadow: 2px 4px 2px #B8B59A;
+}
+
+
+.yearContainer {
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 50;
+    border: none;
+    background-color: #E0A84B;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: Inter;
+
+}
+
+.yearContainer:hover {
+    box-shadow: 2px 4px 2px #B8B59A;
+}
+
+.yearIn {
+    width: 80px;
+    background-color: #F0ECC9;
+    font-weight: 50;
+    font-size: 24px;
+    border:none;
+    border-radius: 10px;
+    text-align: center;
+    font-family: Inter;
+
+}
+
+input[type=file] {
+    display:none;
+}
+
+#fileSelectionButton {
+    cursor: pointer;
+}
+
+.customFileUpload {
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 50;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: Inter;
+
+}
+
+.customFileUpload:hover{
+    cursor:pointer;
+    box-shadow: 2px 4px 2px #B8B59A;
+}
+
+table {
+    width: 100%;
+    border-style: none;
+    text-align: center;
+    padding: 10px;
+    font-weight: 50;
+    font-family: Inter;
+
+}
+
+td {
+    border-bottom: 1px dashed #326882;
+    border-top: none;
+    border-left: none;
+    border-right:none;
+    font-family: Inter;
+
+
+}
+
+h2{
+    font-size: 24px;
+    font-family: Inter;
+
+}
+
+th {
+    border-bottom: 1px dashed #326882;
+    border-top:none;
+    border-left:none;
+    border-right: none;
+    font-style: bold;
+    font-family: Inter;
+
+}
+
