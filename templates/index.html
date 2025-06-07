@@ -106,7 +106,11 @@
                     method: "POST",
                     body: formData
                 })
-
+                .then(async res => {
+                    const text = await res.text();  // instead of .json()
+                    console.log("Raw response text:", text);
+                    return JSON.parse(text);
+                })
                 .then(res => res.json())
                 .then(data => {
                     console.log("Backend result:", data);
